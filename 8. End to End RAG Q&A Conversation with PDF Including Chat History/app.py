@@ -93,7 +93,7 @@ if api_key:
         qa_prompt = ChatPromptTemplate.from_messages(
             [
                 ("system", system_prompt),
-                MessagesPlaceholder("chat_history")
+                MessagesPlaceholder("chat_history"),
                 ("human", "{input}"),
             ]
         )
@@ -125,9 +125,9 @@ if api_key:
                 }, # Constructs a key "abc123" in `store`
             )
             
-        st.write(st.session_state.store)
-        st.success("Assistant:", response["answer"])
-        st.write("chat History:", session_history.messages)
+            st.write(st.session_state.store)
+            st.write("Assistant:", response["answer"])
+            st.write("chat History:", session_history.messages)
         
 else:
     st.warning("Please enter the Groq API key")
