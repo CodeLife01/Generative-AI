@@ -25,3 +25,5 @@ uvicorn
 langserve 
 sse_starlette
 duckduckgo-search
+mysql-connector-python
+SQLAlchemy
