@@ -27,3 +27,5 @@ sse_starlette
 duckduckgo-search
 mysql-connector-python
 SQLAlchemy
+validators
+youtube_transcript_api
