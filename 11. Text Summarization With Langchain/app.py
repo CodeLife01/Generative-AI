@@ -15,4 +15,12 @@ st.subheader("Summarize URL")
 with st.sidebar:
     groq_api_key = st.text_input("Groq API Key", value="", type="password")
     
-url = st.text_input("")
+url = st.text_input("URL", label_visibility="collapsed")
+
+
+if st.button("Summarizee the Content from YT or Website"):
+    ## Validate all the inputs
+    if not groq_api_key.strip() or not url.strip():
+        st.error("Please provide the information to get started")
+    elif not validators.url(url):
+        st.error("Please")
