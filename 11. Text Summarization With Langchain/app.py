@@ -23,4 +23,14 @@ if st.button("Summarizee the Content from YT or Website"):
     if not groq_api_key.strip() or not url.strip():
         st.error("Please provide the information to get started")
     elif not validators.url(url):
-        st.error("Please")
+        st.error("Please enter a valid URL. it can may be YT video url or website url")
+        
+    else:
+        try:
+            with st.spinner("Waiting..."):
+                ## loading the website or YT video data
+                if "youtube.com" in url:
+                    loader = YoutubeLoader.from_youtube_url(url, add_video_info=True)
+                else:
+                    loader = UnstructuredURLLoader(urls=[url], ssl_verify=False,
+                                                   header = {})
