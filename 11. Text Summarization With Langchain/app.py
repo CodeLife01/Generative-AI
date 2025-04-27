@@ -18,7 +18,7 @@ with st.sidebar:
 url = st.text_input("URL", label_visibility="collapsed")
 
 ## Gemma Model Using Groq API
-llm = ChatGroq(model="llama-3.3-70b-versatile", groq_api_key=groq_api_key)
+llm = ChatGroq(model="gemma2-9b-it", groq_api_key=groq_api_key)
 
 prompt_template = """
 Provide summarize of the following content in 300 words:
