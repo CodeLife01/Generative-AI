@@ -14,16 +14,26 @@ st.subheader("Summarize URL")
 ## Get the Groq API Key asn URL (YT or website) to be Summarized
 with st.sidebar:
     groq_api_key = st.text_input("Groq API Key", value="", type="password")
-    
+
 url = st.text_input("URL", label_visibility="collapsed")
 
+## Gemma Model Using Groq API
+llm = ChatGroq(model="Gemma-7b-It", groq_api_key=groq_api_key)
+
+prompt_template = """
+Provide summarize of the following content in 300 words:
+Content:{text}
+
+"""
+
+prompt = PromptTemplate(template=prompt_template, input_variables=["text"])
 
 if st.button("Summarizee the Content from YT or Website"):
     ## Validate all the inputs
     if not groq_api_key.strip() or not url.strip():
         st.error("Please provide the information to get started")
     elif not validators.url(url):
-        st.error("Please enter a valid URL. it can may be YT video url or website url")
+        st.error("Please enter a valid URL. It can may be YT video url or website url")
         
     else:
         try:
@@ -33,4 +43,14 @@ if st.button("Summarizee the Content from YT or Website"):
                     loader = YoutubeLoader.from_youtube_url(url, add_video_info=True)
                 else:
                     loader = UnstructuredURLLoader(urls=[url], ssl_verify=False,
-                                                   header = {})
+                                                   header = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_5_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36"})
+                docs = loader.load()
+                
+                ## Chain for summarization
+                chain = load_summarize_chain(llm, chain_type="stuff", prompt=prompt)
+                output_summary = chain.run(docs)
+                
+                st.success(output_summary)
+                
+        except Exception as e:
+            st.exception(f"Exception:{e}")
