@@ -29,3 +29,5 @@ mysql-connector-python
 SQLAlchemy
 validators
 youtube_transcript_api
+unstructured
+pytube
