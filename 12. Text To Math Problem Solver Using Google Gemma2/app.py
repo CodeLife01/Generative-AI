@@ -79,11 +79,11 @@ if "messages" not in st.session_state:
 for msg in st.session_state.messages:
     st.chat_message(msg["role"]).write(msg["content"])
     
-"""    
+   
 ## Function to generate the response
-def generate_response(question):
-    response = assistant_agent.invoke({"input":question})
-    return response"""
+##def generate_response(question):
+##    response = assistant_agent.invoke({"input":question})
+##    return response
 
 ## Lets start the interaction
 question=st.text_area("Enter youe question:","I have 5 bananas and 7 grapes. I eat 2 bananas and give away 3 grapes. Then I buy a dozen apples and 2 packs of blueberries. Each pack of blueberries contains 25 berries. How many total pieces of fruit do I have at the end?")
