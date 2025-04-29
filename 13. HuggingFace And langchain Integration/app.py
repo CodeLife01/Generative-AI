@@ -21,7 +21,7 @@ url = st.text_input("URL", label_visibility="collapsed")
 ## Gemma Model Using Groq API
 #llm = ChatGroq(model="llama-3.3-70b-versatile", groq_api_key=groq_api_key)
 
-repo_id = "mistralai/Mistral-7B-Instruct-v0.3"
+repo_id = "Qwen/Qwen3-32B"
 llm = HuggingFaceEndpoint(
     repo_id=repo_id, 
     max_length=150, 
