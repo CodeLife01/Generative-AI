@@ -4,6 +4,7 @@ from langchain_groq import ChatGroq
 from langchain.chains.summarize import load_summarize_chain
 from langchain_community.document_loaders import YoutubeLoader, UnstructuredURLLoader
 
+from langchain_huggingface import HuggingFaceEndpoint
 
 ## Streamlit APP
 st.set_page_config(page_title="LangChain: Summarize Text From YT or website", page_icon="🐦")
@@ -13,12 +14,21 @@ st.subheader("Summarize URL")
 
 ## Get the Groq API Key asn URL (YT or website) to be Summarized
 with st.sidebar:
-    groq_api_key = st.text_input("Groq API Key", value="", type="password")
+    hf_api_key = st.text_input("HuggingFace API Token", value="", type="password")
 
 url = st.text_input("URL", label_visibility="collapsed")
 
 ## Gemma Model Using Groq API
-llm = ChatGroq(model="llama-3.3-70b-versatile", groq_api_key=groq_api_key)
+#llm = ChatGroq(model="llama-3.3-70b-versatile", groq_api_key=groq_api_key)
+
+repo_id = "mistralai/Mistral-7B-Instruct-v0.3"
+llm = HuggingFaceEndpoint(
+    repo_id=repo_id, 
+    max_length=150, 
+    temperature=0.7, 
+    token=hf_api_key,
+    task="text-generation",
+    )
 
 prompt_template = """
 Provide summarize of the following content in 300 words:
@@ -30,7 +40,7 @@ prompt = PromptTemplate(template=prompt_template, input_variables=["text"])
 
 if st.button("Summarizee the Content from YT or Website"):
     ## Validate all the inputs
-    if not groq_api_key.strip() or not url.strip():
+    if not hf_api_key.strip() or not url.strip():
         st.error("Please provide the information to get started")
     elif not validators.url(url):
         st.error("Please enter a valid URL. It can may be YT video url or website url")
