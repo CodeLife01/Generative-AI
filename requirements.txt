@@ -37,3 +37,4 @@ cassio
 datasets
 openai 
 tiktoken
+gradio
