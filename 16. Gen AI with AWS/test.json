@@ -3,7 +3,7 @@
     "contentType": "application/json",
     "accept": "application/json",
     "body": "{\"prompt\":\"this is where you place your input text\",\"max_gen_len\":512,\"temperature\":0.5,\"top_p\":0.9}"
-}
+    }
 
 
 {
@@ -11,4 +11,11 @@
     "contentType": "application/json",
     "accept": "*/*",
     "body": "{\"prompt\":\"\\n\\nHuman: Hello world\\n\\nAssistant:\",\"max_tokens_to_sample\":300,\"temperature\":0.5,\"top_k\":250,\"top_p\":1,\"stop_sequences\":[\"\\n\\nHuman:\"],\"anthropic_version\":\"bedrock-2023-05-31\"}"
-}
+    }
+
+{
+    "modelId": "stability.stable-diffusion-xl-v1",
+    "contentType": "application/json",
+    "accept": "application/json",
+    "body": "{\"text_prompts\":[{\"text\":\"this is where you place your input text\",\"weight\":1}],\"cfg_scale\":10,\"seed\":0,\"steps\":50,\"width\":512,\"height\":512}"
+   }
