@@ -7,7 +7,7 @@ import streamlit as st
 ## We will be Using Titan Embeddings Model to generate Embedding
 
 from langchain_community.embeddings import BedrockEmbeddings
-from langchain.llms.bedrock import Bedrock
+from langchain_community.llms import Bedrock
 
 ## Data Ingestion (Libraries)
 
@@ -17,7 +17,7 @@ from langchain_community.document_loaders import PyPDFDirectoryLoader
 
 ## Vector Embedding And Vector Store
 
-from langchain.vectorstores import FAISS
+from langchain_community.vectorstores import FAISS
 
 ## LLM models
 
@@ -51,7 +51,7 @@ def get_vector_store(docs):
 def get_claude_llm():
     ## create the Anthropic Model
     llm = Bedrock(model_id="anthropic.claude-v2", client=bedrock,
-                  model_kwargs={"maxToken":512})
+                  model_kwargs={"max_tokens_to_sample":512})
     return llm
 
 def get_llama3_llm():
@@ -87,7 +87,8 @@ def get_response_llm(llm, vectorstore_faiss, query):
             search_type="similarity", search_kwargs={"k":3}
         ),
         return_source_documents=True,
-        chain_type_kwargs={"prompt":PROMPT}
+        chain_type_kwargs={"prompt":PROMPT, "document_variable_name": "content"},
+        
     )
 
     answer=qa({"query":query})
@@ -110,12 +111,19 @@ def main():
                 
     if st.button("Claude Output"):
         with st.spinner("Processing..."):
-            faiss_index = FAISS.load_local("faiss_index", bedrock_embeddings)
+            faiss_index = FAISS.load_local("faiss_index", bedrock_embeddings, allow_dangerous_deserialization=True)
             llm = get_claude_llm()
             
             ## Faiss_index = get_vector_store(docs)
             st.write(get_response_llm(llm, faiss_index, user_question))
 
+    if st.button("Llama3 Output"):
+        with st.spinner("Processing..."):
+            faiss_index = FAISS.load_local("faiss_index", bedrock_embeddings, allow_dangerous_deserialization=True)
+            llm = get_llama3_llm()
+            
+            ## Faiss_index = get_vector_store(docs)
+            st.write(get_response_llm(llm, faiss_index, user_question))
             
 if __name__== "__main__":
     main()
