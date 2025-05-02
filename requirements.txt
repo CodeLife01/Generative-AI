@@ -38,3 +38,5 @@ datasets
 openai 
 tiktoken
 gradio
+boto3
+awscli
