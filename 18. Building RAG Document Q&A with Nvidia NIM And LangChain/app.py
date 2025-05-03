@@ -5,7 +5,7 @@ load_dotenv()
 
 client = OpenAI(
   base_url = "https://integrate.api.nvidia.com/v1",
-  api_key = "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"
+  api_key = os.getenv("NVIDIA_API_KEY")
 )
 
 completion = client.chat.completions.create(
