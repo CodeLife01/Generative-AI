@@ -15,7 +15,6 @@ load_dotenv()
 import time
 
 ## load the nvidia API key
-
 os.environ["NVIDIA_API_KEY"] = os.getenv("NVIDIA_API_KEY")
 
 llm = ChatNVIDIA(model="meta/llama-3.1-70b-instruct") ## NVIDIA NIM Inferencing
