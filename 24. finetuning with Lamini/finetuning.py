@@ -42,3 +42,11 @@ def get_data():
         },
     ]
     return data
+import lamini
+from lamini import Lamini
+lamini.api_key = "722d6ce2b07ea2bd7a182a3e9d30743084ded73af89fd079544ec01934dc50df"
+llm = Lamini(model_name="meta-llama/Llama-3.1-8B-Instruct")
+
+data = get_data()
+llm.tune(data_or_dataset_id=data, finetune_args={"learning_rate":1.0e-4})
+
