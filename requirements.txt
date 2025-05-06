@@ -47,3 +47,4 @@ pinecone-client
 pinecone-text
 pinecone-notebooks
 neo4j
+lamini
