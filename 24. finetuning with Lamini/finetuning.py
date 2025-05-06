@@ -50,3 +50,15 @@ llm = Lamini(model_name="meta-llama/Llama-3.1-8B-Instruct")
 data = get_data()
 llm.tune(data_or_dataset_id=data, finetune_args={"learning_rate":1.0e-4})
 
+"""
+Common hyperparameters to tune include:
+
+learning_rate (float) - the learning rate of the model
+
+early_stopping (bool) - whether to use early stopping or not
+
+max_steps (int) - the maximum number of steps to train for
+
+optim (str) - the optimizer to use, e.g. adam or sgd, a string from HuggingFace
+    
+"""
