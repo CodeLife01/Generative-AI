@@ -48,3 +48,5 @@ pinecone-text
 pinecone-notebooks
 neo4j
 lamini
+langgraph
+langsmith
