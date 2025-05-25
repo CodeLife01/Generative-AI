@@ -41,8 +41,7 @@ gradio
 boto3
 awscli
 langchain_nvidia_ai_endpoints
-crewai
-crewai_tools
+pinecone-client
 pinecone-client
 pinecone-text
 pinecone-notebooks
@@ -50,3 +49,5 @@ neo4j
 lamini
 langgraph
 langsmith
+crewai
+crewai_tools
