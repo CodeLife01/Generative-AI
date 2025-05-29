@@ -10,6 +10,7 @@ from langchain_groq import ChatGroq
 from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain_huggingface import HuggingFaceEmbeddings
 
+
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import PyPDFLoader
 
@@ -131,4 +132,7 @@ if api_key:
         
 else:
     st.warning("Please enter the Groq API key")
-    
+
+## --- End of Streamlit App --- 
+# Note: This code is designed to run in a Streamlit environment.
+# Make sure to run this in a Streamlit app context.
